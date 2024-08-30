@@ -59,6 +59,10 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	static_cast<Sensor*>(this->modulesPointer[2])->setMachinist(static_cast<Machinist*>(this->modulesPointer[7]));
 	static_cast<Sensor*>(this->modulesPointer[3])->setMachinist(static_cast<Machinist*>(this->modulesPointer[7]));
 
+	static_cast<Sensor*>(this->modulesPointer[1])->setFloor(1);
+	static_cast<Sensor*>(this->modulesPointer[2])->setFloor(2);
+	static_cast<Sensor*>(this->modulesPointer[3])->setFloor(3);
+
 	// starting sensors reading
 	this->modulesPointer[1]->start();
 	this->modulesPointer[2]->start();

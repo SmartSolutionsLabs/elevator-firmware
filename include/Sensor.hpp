@@ -11,6 +11,7 @@ class Sensor : public Module {
 		bool lastValue = 0;
 		bool currentValue = 0;
 		uint8_t pin;
+		unsigned int floorIndex;
 
 		Machinist * machinist;
 
@@ -26,6 +27,10 @@ class Sensor : public Module {
 		}
 
 		void setValue(bool value);
+
+		void setFloor(unsigned int floor) {
+			floorIndex = floor;
+		}
 
 		void setMachinist(Machinist * machinist) {
 			machinist = machinist;

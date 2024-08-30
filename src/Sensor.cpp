@@ -21,6 +21,8 @@ void Sensor::run(void* data) {
 		if(this->lastValue == true && this->currentValue == false){
 			this->value = true;
 			this->lastValue = this->currentValue;
+
+			this->machinist->adviceFloor(this->floorIndex, this->value);
 		}
 		else if(this->lastValue == false && this-> currentValue == true){
 			this->lastValue = this->currentValue;

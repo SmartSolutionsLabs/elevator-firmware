@@ -24,6 +24,7 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	this->modulesPointer = new Module*[quantity];
 
     this->modulesPointer[0] = new Motor("Motor");
+    this->modulesPointer[0]->connect(nullptr);
     this->modulesPointer[0]->start();
 
     this->modulesPointer[1] = new Sensor("SensorFloor1");

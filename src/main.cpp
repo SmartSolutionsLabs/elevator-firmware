@@ -34,8 +34,7 @@ void IRAM_ATTR interruptButton3() {
 
 void setup(){
     Serial.begin(115200);
-    pinMode(12,OUTPUT);
-    digitalWrite(12,HIGH);
+
     /*
     attachInterrupt(digitalPinToInterrupt(19), SensorFloor1, RISING); // Configure the interrupt
     attachInterrupt(digitalPinToInterrupt(23), SensorFloor2, RISING); // Configure the interrupt

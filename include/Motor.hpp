@@ -28,6 +28,15 @@ class Motor : public Module {
 
 		void down();
 
+		void showStatus();
+
+		enum{
+				OFF,
+				UP,
+				DOWN
+		}state = OFF;
+
+		unsigned int getState();
 };
 
 #endif

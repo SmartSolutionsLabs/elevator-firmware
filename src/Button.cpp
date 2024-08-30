@@ -1,14 +1,12 @@
-#include "Sensor.hpp"
+#include "Button.hpp"
 
-Sensor::Sensor(const char * name, int taskCore) : Module(name, taskCore) {
+Button::Button(const char * name, int taskCore) : Module(name, taskCore) {
 }
 
-void Sensor::connect(void * data) {
-	
+void Button::connect(void * data) {
 }
 
-void Sensor::run(void* data) {
-	unsigned long timer = millis(); 
+void Button::run(void* data) {
 	while (1) {
 		if(digitalRead(this->PIN) == false){ // pushed
 			this->currentValue = false;
@@ -29,11 +27,11 @@ void Sensor::run(void* data) {
 	}
 }
 
-void Sensor::setValue(bool value){
+void Button::setValue(bool value){
 	this->value = value;
 }
 
-void Sensor::setPIN(uint8_t pin){
+void Button::setPIN(uint8_t pin){
 	this->PIN = pin;
 	pinMode(this->PIN , INPUT);
 }

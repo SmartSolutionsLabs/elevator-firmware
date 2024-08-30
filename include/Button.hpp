@@ -1,16 +1,16 @@
-#ifndef INC_SENSOR
-#define INC_SENSOR
+#ifndef INC_BUTTON
+#define INC_BUTTON
 
 #include <Module.hpp>
 
-class Sensor : public Module {
+class Button : public Module {
 	private:
 		bool value = 0;
 		bool lastValue = 0;
 		bool currentValue = 0;
 		uint8_t PIN ;
 	public:
-		Sensor(const char * name, int taskCore = 1);
+		Button(const char * name, int taskCore = 1);
 
 		void connect(void * data) override;
 

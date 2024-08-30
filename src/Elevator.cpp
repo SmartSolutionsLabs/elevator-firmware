@@ -28,20 +28,17 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	// Pin number for sensor
 	uint8_t pin;
 
-	this->modulesPointer[1] = new Sensor("SensorFloor1");
 	pin = 16;
+	this->modulesPointer[1] = new Sensor("SensorFloor1");
 	this->modulesPointer[1]->connect(&pin);
-	this->modulesPointer[1]->start();
 
-	this->modulesPointer[2] = new Sensor("SensorFloor2");
 	pin = 23;
+	this->modulesPointer[2] = new Sensor("SensorFloor2");
 	this->modulesPointer[2]->connect(&pin);
-	this->modulesPointer[2]->start();
 
-	this->modulesPointer[3] = new Sensor("SensorFloor3");
 	pin = 19;
+	this->modulesPointer[3] = new Sensor("SensorFloor3");
 	this->modulesPointer[3]->connect(&pin);
-	this->modulesPointer[3]->start();
 
 	this->modulesPointer[4] = new Button("Button1");
 	this->modulesPointer[4]->start();
@@ -61,6 +58,11 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	static_cast<Sensor*>(this->modulesPointer[1])->setMachinist(static_cast<Machinist*>(this->modulesPointer[7]));
 	static_cast<Sensor*>(this->modulesPointer[2])->setMachinist(static_cast<Machinist*>(this->modulesPointer[7]));
 	static_cast<Sensor*>(this->modulesPointer[3])->setMachinist(static_cast<Machinist*>(this->modulesPointer[7]));
+
+	// starting sensors reading
+	this->modulesPointer[1]->start();
+	this->modulesPointer[2]->start();
+	this->modulesPointer[3]->start();
 }
 
 Motor* Elevator::getMotor(){

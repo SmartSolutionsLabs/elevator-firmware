@@ -10,7 +10,7 @@ class Sensor : public Module {
 		bool value = 0;
 		bool lastValue = 0;
 		bool currentValue = 0;
-		uint8_t PIN ;
+		uint8_t pin;
 
 		Machinist * machinist;
 
@@ -26,7 +26,6 @@ class Sensor : public Module {
 		}
 
 		void setValue(bool value);
-		void setPIN(uint8_t pin);
 
 		void setMachinist(Machinist * machinist) {
 			machinist = machinist;

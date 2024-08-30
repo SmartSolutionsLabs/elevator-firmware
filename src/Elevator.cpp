@@ -25,17 +25,23 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	this->modulesPointer[0] = new Motor("Motor");
 	this->modulesPointer[0]->start();
 
+	// Pin number for sensor
+	uint8_t pin;
+
 	this->modulesPointer[1] = new Sensor("SensorFloor1");
+	pin = 16;
+	this->modulesPointer[1]->connect(&pin);
 	this->modulesPointer[1]->start();
-	this->getSensor(0)->setPIN(16);
 
 	this->modulesPointer[2] = new Sensor("SensorFloor2");
+	pin = 23;
+	this->modulesPointer[2]->connect(&pin);
 	this->modulesPointer[2]->start();
-	this->getSensor(1)->setPIN(23);
 
 	this->modulesPointer[3] = new Sensor("SensorFloor3");
+	pin = 19;
+	this->modulesPointer[3]->connect(&pin);
 	this->modulesPointer[3]->start();
-	this->getSensor(2)->setPIN(19);
 
 	this->modulesPointer[4] = new Button("Button1");
 	this->modulesPointer[4]->start();

@@ -4,13 +4,14 @@ Sensor::Sensor(const char * name, int taskCore) : Module(name, taskCore) {
 }
 
 void Sensor::connect(void * data) {
-
+	this->pin = * (uint8_t *) data;
+	pinMode(this->pin , INPUT);
 }
 
 void Sensor::run(void* data) {
 	unsigned long timer = millis();
 	while (1) {
-		if(digitalRead(this->PIN) == false){ // pushed
+		if(digitalRead(this->pin) == false){ // pushed
 			this->currentValue = false;
 		}
 		else{
@@ -31,9 +32,4 @@ void Sensor::run(void* data) {
 
 void Sensor::setValue(bool value){
 	this->value = value;
-}
-
-void Sensor::setPIN(uint8_t pin){
-	this->PIN = pin;
-	pinMode(this->PIN , INPUT);
 }

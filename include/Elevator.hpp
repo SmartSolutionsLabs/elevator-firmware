@@ -17,7 +17,7 @@ class Elevator : public Application {
 		Button* getButton(int index);
 
 		unsigned int currentFloor = 1;
-		unsigned int destinyFloor = 2;
+
 		unsigned int startFloor = 1;
 		bool isNotChangingFloor = true;
 

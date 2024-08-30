@@ -5,6 +5,11 @@
 
 class Machinist : public Module {
 	private:
+		/**
+		 * Where basket must go.
+		 */
+		unsigned int destinyFloor;
+
 		bool floorStates[3];
 	public:
 		Machinist(const char * name, int taskCore = 1);

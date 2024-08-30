@@ -3,6 +3,8 @@
 
 #include <Module.hpp>
 
+#include "Motor.hpp"
+
 class Machinist : public Module {
 	private:
 		/**
@@ -11,6 +13,9 @@ class Machinist : public Module {
 		unsigned int destinyFloor;
 
 		bool floorStates[3];
+
+		Motor * motor;
+
 	public:
 		Machinist(const char * name, int taskCore = 1);
 
@@ -22,6 +27,10 @@ class Machinist : public Module {
 		 * Modify values in floors array.
 		 */
 		void adviceFloor(unsigned int floorIndex, bool value);
+
+		void setMotor(Motor * motor) {
+			motor = motor;
+		}
 };
 
 #endif

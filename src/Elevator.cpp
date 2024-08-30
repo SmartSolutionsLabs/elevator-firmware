@@ -50,6 +50,11 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	this->getButton(2)->setPIN(18);
 
 	this->modulesPointer[7] = new Machinist("machinist");
+
+	// Passing machinist to all sensors
+	static_cast<Sensor*>(this->modulesPointer[1])->setMachinist(static_cast<Machinist*>(this->modulesPointer[7]));
+	static_cast<Sensor*>(this->modulesPointer[2])->setMachinist(static_cast<Machinist*>(this->modulesPointer[7]));
+	static_cast<Sensor*>(this->modulesPointer[3])->setMachinist(static_cast<Machinist*>(this->modulesPointer[7]));
 }
 
 Motor* Elevator::getMotor(){

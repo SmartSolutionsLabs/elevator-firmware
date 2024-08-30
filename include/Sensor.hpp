@@ -3,12 +3,17 @@
 
 #include <Module.hpp>
 
+#include "Machinist.hpp"
+
 class Sensor : public Module {
 	private:
 		bool value = 0;
 		bool lastValue = 0;
 		bool currentValue = 0;
 		uint8_t PIN ;
+
+		Machinist * machinist;
+
 	public:
 		Sensor(const char * name, int taskCore = 1);
 
@@ -22,6 +27,10 @@ class Sensor : public Module {
 
 		void setValue(bool value);
 		void setPIN(uint8_t pin);
+
+		void setMachinist(Machinist * machinist) {
+			machinist = machinist;
+		}
 };
 
 #endif

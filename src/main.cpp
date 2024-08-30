@@ -4,7 +4,7 @@ Elevator * elevator;
 
 void setup(){
 	elevator = new Elevator();
-	elevator->initializeModulesPointerArray(2);
+	elevator->initializeModulesPointerArray(8);
 	elevator->beginSerialPort(Serial);
 }
 

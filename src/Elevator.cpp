@@ -48,6 +48,8 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	 this->modulesPointer[6] = new Button("Button3");
 	this->modulesPointer[6]->start();
 	this->getButton(2)->setPIN(18);
+
+	this->modulesPointer[7] = new Machinist("machinist");
 }
 
 Motor* Elevator::getMotor(){

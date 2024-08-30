@@ -5,6 +5,7 @@
 #include "Sensor.hpp"
 #include "Button.hpp"
 #include "Motor.hpp"
+#include "Machinist.hpp"
 
 
 class Elevator : public Application {

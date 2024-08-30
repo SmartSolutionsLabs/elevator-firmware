@@ -22,21 +22,21 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	this->modulesPointerQuantity = quantity;
 
 	this->modulesPointer = new Module*[quantity];
-    
+
     this->modulesPointer[0] = new Motor("Motor");
     this->modulesPointer[0]->start();
 
     this->modulesPointer[1] = new Sensor("SensorFloor1");
     this->modulesPointer[1]->start();
-    this->getSensor(0)->setPIN(19);
+    this->getSensor(0)->setPIN(16);
 
     this->modulesPointer[2] = new Sensor("SensorFloor2");
     this->modulesPointer[2]->start();
     this->getSensor(1)->setPIN(23);
-    
+
     this->modulesPointer[3] = new Sensor("SensorFloor3");
     this->modulesPointer[3]->start();
-    this->getSensor(2)->setPIN(16);
+    this->getSensor(2)->setPIN(19);
 
     this->modulesPointer[4] = new Button("Button1");
     this->modulesPointer[4]->start();
@@ -46,7 +46,7 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
     this->modulesPointer[5]->start();
     this->getButton(1)->setPIN(5);
 
-    this->modulesPointer[6] = new Button("Button3");
+     this->modulesPointer[6] = new Button("Button3");
     this->modulesPointer[6]->start();
     this->getButton(2)->setPIN(18);
 
@@ -64,7 +64,7 @@ Button* Elevator::getButton(int index){
     return static_cast<Button*>(this->modulesPointer[index + 4]);
 }
 
-void Elevator::changingFloor(){ 
+void Elevator::changingFloor(){
     this->isNotChangingFloor = false;
 }
 
@@ -73,17 +73,22 @@ void Elevator::setDestinyFloor(unsigned int destinyfloor){
 }
 
 void Elevator::goToFloor(unsigned int floor){
-    if(READY){
-        this->destinyFloor = floor;
-        if(this->currentFloor < floor){
-            this->getMotor()->up();
-        }
-        if(this->currentFloor > floor){
-            this->getMotor()->down();
-        }
-        if(this->currentFloor == floor){
-            this->getMotor()->stop();
-        }
+    this->destinyFloor = floor;
+    Serial.println("mandando al piso" + String(floor+1));
+    if(this->currentFloor < floor){
+        Serial.println("motor trying go up");
+        this->getMotor()->up();
+        Serial.println("motor go up");
+    }
+    if(this->currentFloor > floor){
+        Serial.println("motor trying go down");
+        this->getMotor()->down();
+        Serial.println("motor go down");
+    }
+    if(this->currentFloor == floor){
+        Serial.println("motor stop...");
+        this->getMotor()->off();
+        Serial.println("motor stop");
     }
 }
 
@@ -102,7 +107,7 @@ void Elevator::checkFloor(){
     }
 
     if(this->currentFloor == this->destinyFloor){
-        this->state = ARRIVED;
+        //this->state = ARRIVED;
         this->getMotor()->off();
     }
     else{
@@ -126,17 +131,17 @@ void Elevator::checkControl(){
 }
 
 void Elevator::checkStatus(){
-    this->getMotor()->showStatus();    
+    this->getMotor()->showStatus();
 }
     //isReady -> esta liberado para otra accion;
     //isMoving -> esta bloqueado porque se traslada de un piso a otro;
     //isWaiting -> esta esperando despues la llamada; (con timeout)
 unsigned int Elevator::getCurrentFloor(){
-    return this->currentFloor;    
+    return this->currentFloor;
 }
 
 unsigned int Elevator::getDestinyFloor(){
-    return this->destinyFloor;    
+    return this->destinyFloor;
 }
 
 String Elevator::getState(){

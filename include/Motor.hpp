@@ -6,7 +6,7 @@
 class Motor : public Module {
 	private:
 		bool running = false;
-
+		bool PIN;
 	public:
 		Motor(const char * name, int taskCore = 1);
 

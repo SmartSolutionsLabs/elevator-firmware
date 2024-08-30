@@ -4,11 +4,11 @@ Sensor::Sensor(const char * name, int taskCore) : Module(name, taskCore) {
 }
 
 void Sensor::connect(void * data) {
-	
+
 }
 
 void Sensor::run(void* data) {
-	unsigned long timer = millis(); 
+	unsigned long timer = millis();
 	while (1) {
 		if(digitalRead(this->PIN) == false){ // pushed
 			this->currentValue = false;

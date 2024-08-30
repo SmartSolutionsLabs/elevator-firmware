@@ -1,6 +1,6 @@
 #include "Elevator.hpp"
 
-Elevator * elevator; 
+Elevator * elevator;
 
 /*
 void IRAM_ATTR SensorFloor1() {
@@ -48,10 +48,9 @@ void setup(){
     elevator = new Elevator();
 	elevator->initializeModulesPointerArray(2);
 
-
 	//elevator->beginSerialPort(Serial);
-
 }
+
  unsigned long loopTimer = 0;
 void loop(){
     if(millis() -loopTimer > 1500){
@@ -71,4 +70,5 @@ void loop(){
     }
     elevator->checkFloor();
     elevator->checkControl();
+    delay(10);
 }

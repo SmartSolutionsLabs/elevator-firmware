@@ -28,11 +28,11 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	// Pin number for sensor
 	uint8_t pin;
 
-	pin = 16;
+	pin = 23;
 	this->modulesPointer[1] = new Sensor("SensorFloor1");
 	this->modulesPointer[1]->connect(&pin);
 
-	pin = 23;
+	pin = 16;
 	this->modulesPointer[2] = new Sensor("SensorFloor2");
 	this->modulesPointer[2]->connect(&pin);
 

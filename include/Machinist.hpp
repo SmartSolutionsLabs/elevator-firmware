@@ -24,6 +24,11 @@ class Machinist : public Module {
 		void run(void* data) override;
 
 		/**
+		 * Performs movement of basket.
+		 */
+		void work();
+
+		/**
 		 * Modify values in floors array.
 		 */
 		void adviceFloor(unsigned int floorIndex, bool value);

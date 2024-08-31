@@ -86,51 +86,9 @@ void Elevator::changingFloor(){
 }
 
 void Elevator::setDestinyFloor(unsigned int destinyfloor){
-	this->destinyFloor = destinyfloor;
 }
 
 void Elevator::goToFloor(unsigned int floor){
-	this->destinyFloor = floor;
-	Serial.println("mandando al piso" + String(floor+1));
-	if(this->currentFloor < floor){
-		Serial.println("motor trying go up");
-		this->getMotor()->up();
-		Serial.println("motor go up");
-	}
-	if(this->currentFloor > floor){
-		Serial.println("motor trying go down");
-		this->getMotor()->down();
-		Serial.println("motor go down");
-	}
-	if(this->currentFloor == floor){
-		Serial.println("motor stop...");
-		this->getMotor()->off();
-		Serial.println("motor stop");
-	}
-}
-
-void Elevator::checkFloor(){
-	if(this->getSensor(0)->getValue()==true && this->getSensor(1)->getValue()==false && this->getSensor(2)->getValue()==false){
-		this->currentFloor = 0;
-	}
-	else if(this->getSensor(0)->getValue()==false && this->getSensor(1)->getValue()==true && this->getSensor(2)->getValue()==false){
-		this->currentFloor = 1;
-	}
-	else if(this->getSensor(0)->getValue()==false && this->getSensor(1)->getValue()==false && this->getSensor(2)->getValue()==true){
-		this->currentFloor = 2;
-	}
-	else{
-		//error!
-	}
-
-	if(this->currentFloor == this->destinyFloor){
-		//this->state = ARRIVED;
-		this->getMotor()->off();
-	}
-	else{
-		//this->getSensor(this->currentFloor)->setValue(false);
-	}
-
 }
 
 void Elevator::checkControl(){
@@ -153,13 +111,6 @@ void Elevator::checkStatus(){
 	//isReady -> esta liberado para otra accion;
 	//isMoving -> esta bloqueado porque se traslada de un piso a otro;
 	//isWaiting -> esta esperando despues la llamada; (con timeout)
-unsigned int Elevator::getCurrentFloor(){
-	return this->currentFloor;
-}
-
-unsigned int Elevator::getDestinyFloor(){
-	return this->destinyFloor;
-}
 
 String Elevator::getState(){
 	String statePrintable[5] ={"READY","MOVING","WAITING","ARRIVED","ERROR"};

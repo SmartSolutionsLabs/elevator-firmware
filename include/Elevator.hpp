@@ -21,7 +21,6 @@ class Elevator : public Application {
 
 		void changingFloor();
 		void goToFloor(unsigned int floor);
-		void setDestinyFloor(unsigned int destinyfloor);
 		void checkFloor(); //cambia estados
 		void checkControl(); // VERIFICA SI SE PUEDE LLAMAR EL ASCENSOR DESDE OTRO PISO
 		void setHome(); // INICIALIZA EL ASCENSOR A UN LUGAR SEGURO

@@ -85,10 +85,9 @@ void Elevator::changingFloor(){
 	this->isNotChangingFloor = false;
 }
 
-void Elevator::setDestinyFloor(unsigned int destinyfloor){
-}
-
-void Elevator::goToFloor(unsigned int floor){
+void Elevator::goToFloor(unsigned int floor) {
+	static_cast<Machinist*>(this->modulesPointer[7])->setDestinyFloor(floor);
+	static_cast<Machinist*>(this->modulesPointer[7])->work();
 }
 
 void Elevator::checkControl(){

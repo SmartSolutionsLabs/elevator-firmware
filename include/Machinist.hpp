@@ -33,6 +33,10 @@ class Machinist : public Module {
 		 */
 		void adviceFloor(unsigned int floorIndex, bool value);
 
+		void setDestinyFloor(unsigned int destinyFloor) {
+			destinyFloor = destinyFloor;
+		}
+
 		void setMotor(Motor * motor) {
 			motor = motor;
 		}

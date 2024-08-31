@@ -20,20 +20,20 @@ void Motor::run(void* data) {
 }
 
 void Motor::off(){
-	digitalWrite(12,HIGH);
+	digitalWrite(13,HIGH);
 	digitalWrite(14,HIGH);
 	this->state = OFF;
 }
 
 void Motor::up(){
-	digitalWrite(12,LOW);
-	digitalWrite(14,LOW);
+	digitalWrite(13,LOW);
+	digitalWrite(14,HIGH);
 	this->state = UP;
 }
 
 void Motor::down(){
-	digitalWrite(12,LOW);
-	digitalWrite(14,HIGH);
+	digitalWrite(13,LOW);
+	digitalWrite(14,LOW);
 	this->state = DOWN;
 }
 

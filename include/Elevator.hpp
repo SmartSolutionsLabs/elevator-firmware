@@ -15,7 +15,7 @@ class Elevator : public Application {
         Sensor* getSensor(int index);
         Button* getButton(int index);
 
-        unsigned int currentFloor = 1;
+        unsigned int currentFloor = 2;
         unsigned int destinyFloor = 2;
         unsigned int startFloor = 1;
         bool isNotChangingFloor = true;

@@ -22,46 +22,46 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 
 	this->modulesPointer = new Module*[quantity];
 
-	this->modulesPointer[0] = new Motor("Motor");
-	this->modulesPointer[0]->start();
+	this->modulesPointer[INDEX_MODULE_MOTOR] = new Motor("Motor");
+	this->modulesPointer[INDEX_MODULE_MOTOR]->start();
 
 	// Pin number for sensor
 	uint8_t pin;
 
 	pin = 23;
-	this->modulesPointer[1] = new Sensor("SensorFloor1");
-	this->modulesPointer[1]->connect(&pin);
+	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_1] = new Sensor("SensorFloor1");
+	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_1]->connect(&pin);
 
 	pin = 16;
-	this->modulesPointer[2] = new Sensor("SensorFloor2");
-	this->modulesPointer[2]->connect(&pin);
+	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_2] = new Sensor("SensorFloor2");
+	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_2]->connect(&pin);
 
 	pin = 19;
-	this->modulesPointer[3] = new Sensor("SensorFloor3");
-	this->modulesPointer[3]->connect(&pin);
+	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_3] = new Sensor("SensorFloor3");
+	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_3]->connect(&pin);
 
-	this->modulesPointer[4] = new Joypad("jpd");
-	this->modulesPointer[4]->start();
+	this->modulesPointer[INDEX_MODULE_JOYPAD] = new Joypad("jpd");
+	this->modulesPointer[INDEX_MODULE_JOYPAD]->start();
 
-	this->modulesPointer[7] = new Machinist("machinist");
+	this->modulesPointer[INDEX_MODULE_MACHINIST] = new Machinist("machinist");
 
 	// Passing machinist to all sensors
-	static_cast<Sensor*>(this->modulesPointer[1])->setMachinist(static_cast<Machinist*>(this->modulesPointer[7]));
-	static_cast<Sensor*>(this->modulesPointer[2])->setMachinist(static_cast<Machinist*>(this->modulesPointer[7]));
-	static_cast<Sensor*>(this->modulesPointer[3])->setMachinist(static_cast<Machinist*>(this->modulesPointer[7]));
+	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_1])->setMachinist(static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST]));
+	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_2])->setMachinist(static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST]));
+	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_3])->setMachinist(static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST]));
 
-	static_cast<Sensor*>(this->modulesPointer[1])->setFloor(1);
-	static_cast<Sensor*>(this->modulesPointer[2])->setFloor(2);
-	static_cast<Sensor*>(this->modulesPointer[3])->setFloor(3);
+	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_1])->setFloor(1);
+	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_2])->setFloor(2);
+	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_3])->setFloor(3);
 
 	// starting sensors reading
-	this->modulesPointer[1]->start();
-	this->modulesPointer[2]->start();
-	this->modulesPointer[3]->start();
+	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_1]->start();
+	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_2]->start();
+	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_3]->start();
 }
 
 Motor* Elevator::getMotor(){
-	return static_cast<Motor*>(this->modulesPointer[0]);
+	return static_cast<Motor*>(this->modulesPointer[INDEX_MODULE_MOTOR]);
 }
 
 Sensor* Elevator::getSensor(int index){
@@ -73,8 +73,8 @@ void Elevator::changingFloor(){
 }
 
 void Elevator::goToFloor(unsigned int floor) {
-	static_cast<Machinist*>(this->modulesPointer[7])->setDestinyFloor(floor);
-	static_cast<Machinist*>(this->modulesPointer[7])->work();
+	static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST])->setDestinyFloor(floor);
+	static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST])->work();
 }
 
 void Elevator::checkStatus(){

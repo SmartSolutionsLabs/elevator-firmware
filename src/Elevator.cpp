@@ -72,17 +72,10 @@ Sensor* Elevator::getSensor(int index){
 	return static_cast<Sensor*>(this->modulesPointer[index + 1]);
 }
 
-void Elevator::changingFloor(){
-	this->isNotChangingFloor = false;
-}
-
 void Elevator::goToFloor(unsigned int floor) {
 	static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST])->handleTargetFloor(floor);
 }
 
-void Elevator::checkStatus(){
-	this->getMotor()->showStatus();
-}
 	//isReady -> esta liberado para otra accion;
 	//isMoving -> esta bloqueado porque se traslada de un piso a otro;
 	//isWaiting -> esta esperando despues la llamada; (con timeout)

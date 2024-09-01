@@ -25,14 +25,9 @@ class Elevator : public Application {
 		Sensor* getSensor(int index);
 
 		unsigned int startFloor = 1;
-		bool isNotChangingFloor = true;
 
-		void changingFloor();
 		void goToFloor(unsigned int floor);
-		void checkFloor(); //cambia estados
-		void checkControl(); // VERIFICA SI SE PUEDE LLAMAR EL ASCENSOR DESDE OTRO PISO
 		void setHome(); // INICIALIZA EL ASCENSOR A UN LUGAR SEGURO
-		void checkStatus();
 		enum State{ READY,
 					MOVING,
 					WAITING,

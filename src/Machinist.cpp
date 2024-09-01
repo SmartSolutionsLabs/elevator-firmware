@@ -16,9 +16,17 @@ void Machinist::handleArrivedFloor(unsigned int floorIndex, bool value) {
 void Machinist::handleDestinyFloor(unsigned int destinyFloor) {
 	this->destinyFloor = destinyFloor;
 
+	// defining lambda to use the private method
+	auto privateAction = [this]() {
+		this->work();
+	};
+
 	if(this->countdownHandTimer == nullptr) {
 		static const esp_timer_create_args_t countdown_timer_args = {
-				.callback = &interruptCountdownHand,
+				.callback = [](void* arg) {
+					auto* lambda = static_cast<decltype(privateAction)*>(arg);
+					(*lambda)(); // Execute lambda
+				},
 				.arg = (void *) this,
 				.dispatch_method = ESP_TIMER_TASK,
 				.name = "machinist-countdown"

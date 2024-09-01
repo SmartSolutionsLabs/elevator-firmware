@@ -20,7 +20,8 @@ void Joypad::run(void* data) {
 
 	while (1) {
 		// Verify floor button state
-		while (i--) {
+		while (i > 0) {
+			--i;
 			this->floorButtons[i].reading = digitalRead(this->floorButtons[i].pin);
 			if (this->floorButtons[i].reading != this->floorButtons[i].lastButtonState) {
 				this->floorButtons[i].lastDebounceTime = millis();  // Reset debouncer

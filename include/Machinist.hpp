@@ -16,17 +16,17 @@ class Machinist : public Module {
 
 		Motor * motor;
 
+		/**
+		 * Performs movement of basket.
+		 */
+		void work();
+
 	public:
 		Machinist(const char * name, int taskCore = 1);
 
 		void connect(void * data) override;
 
 		void run(void* data) override;
-
-		/**
-		 * Performs movement of basket.
-		 */
-		void work();
 
 		/**
 		 * Modify values in floors array.

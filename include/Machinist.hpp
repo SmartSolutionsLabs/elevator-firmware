@@ -26,6 +26,8 @@ class Machinist : public Module {
 		 */
 		esp_timer_handle_t countdownHandTimer = nullptr;
 
+		std::function<void()> privateAction;
+
 	public:
 		Machinist(const char * name, int taskCore = 1);
 

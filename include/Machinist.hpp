@@ -33,9 +33,10 @@ class Machinist : public Module {
 		 */
 		void handleArrivedFloor(unsigned int floorIndex, bool value);
 
-		void setDestinyFloor(unsigned int destinyFloor) {
-			destinyFloor = destinyFloor;
-		}
+		/**
+		 * Catch calling from buttons.
+		 */
+		void handleDestinyFloor(unsigned int destinyFloor);
 
 		void setMotor(Motor * motor) {
 			motor = motor;

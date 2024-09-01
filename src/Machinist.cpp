@@ -9,6 +9,10 @@ void Machinist::handleArrivedFloor(unsigned int floorIndex, bool value) {
 	this->work();
 }
 
+void Machinist::handleDestinyFloor(unsigned int destinyFloor) {
+	this->destinyFloor = destinyFloor;
+}
+
 void Machinist::connect(void * data) {
 }
 

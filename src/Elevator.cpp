@@ -77,7 +77,7 @@ void Elevator::changingFloor(){
 }
 
 void Elevator::goToFloor(unsigned int floor) {
-	static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST])->setDestinyFloor(floor);
+	static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST])->handleDestinyFloor(floor);
 }
 
 void Elevator::checkStatus(){

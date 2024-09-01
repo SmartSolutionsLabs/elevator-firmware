@@ -32,8 +32,8 @@ class Sensor : public Module {
 			floorIndex = floor;
 		}
 
-		void setMachinist(Machinist * machinist) {
-			machinist = machinist;
+		void setMachinist(Machinist * newMachinist) {
+			machinist = newMachinist;
 		}
 };
 

@@ -60,8 +60,8 @@ class Machinist : public Module {
 			return state;
 		}
 
-		void setMotor(Motor * motor) {
-			motor = motor;
+		void setMotor(Motor * newMotor) {
+			motor = newMotor;
 		}
 };
 

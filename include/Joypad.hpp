@@ -29,8 +29,8 @@ class Joypad : public Module {
 
 		void run(void* data) override;
 
-		void setMachinist(Machinist * machinist) {
-			machinist = machinist;
+		void setMachinist(Machinist * newMachinist) {
+			machinist = newMachinist;
 		}
 };
 

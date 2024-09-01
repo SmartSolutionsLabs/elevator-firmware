@@ -9,7 +9,8 @@ void Sensor::connect(void * data) {
 }
 
 void Sensor::run(void* data) {
-	unsigned long timer = millis();
+	this->iterationDelay = 10 / portTICK_PERIOD_MS;
+
 	while (1) {
 		if(digitalRead(this->pin) == false){ // pushed
 			this->currentValue = false;
@@ -28,7 +29,8 @@ void Sensor::run(void* data) {
 			this->lastValue = this->currentValue;
 			this->value = false;
 		}
-		vTaskDelay(10);
+
+		vTaskDelay(this->iterationDelay);
 	}
 }
 

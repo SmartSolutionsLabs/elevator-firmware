@@ -5,8 +5,19 @@
 
 #include "Motor.hpp"
 
+enum Work {
+	READY, // accepting instructions from anyone and executes "inmediately"
+	MOVING_DOWN, // ascending
+	MOVING_UP, // descending
+	WAITING, // basket arrived from another floor to current floor
+	ARRIVED, // work completed
+	LOST // bewildered, disconcerted to take decisions
+};
+
 class Machinist : public Module {
 	private:
+		Work state;
+
 		/**
 		 * Where basket must go.
 		 */

@@ -67,14 +67,6 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	this->modulesPointer[INDEX_MODULE_JOYPAD]->start();
 }
 
-Motor* Elevator::getMotor(){
-	return static_cast<Motor*>(this->modulesPointer[INDEX_MODULE_MOTOR]);
-}
-
-Sensor* Elevator::getSensor(int index){
-	return static_cast<Sensor*>(this->modulesPointer[index + 1]);
-}
-
 void Elevator::goToFloor(unsigned int floor) {
 	static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST])->handleTargetFloor(floor);
 }

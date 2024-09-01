@@ -21,8 +21,6 @@ class Elevator : public Application {
 	public:
 		void processMessage(unsigned char * message, size_t length, bool printable);
 		void initializeModulesPointerArray(unsigned int quantity) override;
-		Motor* getMotor();
-		Sensor* getSensor(int index);
 
 		unsigned int startFloor = 1;
 

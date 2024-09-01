@@ -21,25 +21,14 @@ void Motor::run(void* data) {
 void Motor::off() {
 	digitalWrite(12, HIGH);
 	digitalWrite(14, HIGH);
-	this->state = OFF;
 }
 
 void Motor::up() {
 	digitalWrite(12, LOW);
 	digitalWrite(14, LOW);
-	this->state = UP;
 }
 
 void Motor::down() {
 	digitalWrite(12, LOW);
 	digitalWrite(14, HIGH);
-	this->state = DOWN;
-}
-
-void Motor::showStatus() {
-	//Serial.println(String(name) + "\n Status : " + String(state));
-}
-
-unsigned int Motor::getState() {
-	return this->state;
 }

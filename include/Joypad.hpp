@@ -3,6 +3,8 @@
 
 #include <Module.hpp>
 
+#include "Machinist.hpp"
+
 class Joypad : public Module {
 	private:
 		struct Button {
@@ -18,12 +20,18 @@ class Joypad : public Module {
 		// Buttons for calling the floor where is pressed
 		Button floorButtons[3];
 
+		Machinist * machinist;
+
 	public:
 		Joypad(const char * name, int taskCore = 1);
 
 		void connect(void * data) override;
 
 		void run(void* data) override;
+
+		void setMachinist(Machinist * machinist) {
+			machinist = machinist;
+		}
 };
 
 #endif

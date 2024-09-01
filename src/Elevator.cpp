@@ -51,6 +51,9 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_2])->setMachinist(static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST]));
 	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_3])->setMachinist(static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST]));
 
+	// Passing machinist to the joypad
+	static_cast<Joypad*>(this->modulesPointer[INDEX_MODULE_JOYPAD])->setMachinist(static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST]));
+
 	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_1])->setFloor(1);
 	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_2])->setFloor(2);
 	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_3])->setFloor(3);

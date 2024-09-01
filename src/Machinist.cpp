@@ -13,8 +13,8 @@ void Machinist::handleArrivedFloor(unsigned int floorIndex, bool value) {
 	this->work();
 }
 
-void Machinist::handleDestinyFloor(unsigned int destinyFloor) {
-	this->destinyFloor = destinyFloor;
+void Machinist::handleTargetFloor(unsigned int targetFloor) {
+	this->targetFloor = targetFloor;
 
 	if(this->countdownHandTimer == nullptr) {
 		static const esp_timer_create_args_t countdown_timer_args = {
@@ -58,22 +58,22 @@ void Machinist::work() {
 		return;
 	}
 
-	Serial.printf("Will move from %d to %d", currentFloor, (this->destinyFloor + 1));
+	Serial.printf("Will move from %d to %d", currentFloor, (this->targetFloor + 1));
 
 	// Turn off because we arrived
-	if(currentFloor == this->destinyFloor) {
+	if(currentFloor == this->targetFloor) {
 		// I hope everything is right
 		this->motor->off();
 
 		return;
 	}
 
-	if(currentFloor < this->destinyFloor) {
+	if(currentFloor < this->targetFloor) {
 		this->motor->up();
 		return;
 	}
 
-	if(currentFloor > this->destinyFloor) {
+	if(currentFloor > this->targetFloor) {
 		this->motor->down();
 		return;
 	}

@@ -10,7 +10,7 @@ class Machinist : public Module {
 		/**
 		 * Where basket must go.
 		 */
-		unsigned int destinyFloor;
+		unsigned int targetFloor;
 
 		bool floorStates[3];
 
@@ -43,7 +43,7 @@ class Machinist : public Module {
 		/**
 		 * Catch calling from buttons.
 		 */
-		void handleDestinyFloor(unsigned int destinyFloor);
+		void handleTargetFloor(unsigned int targetFloor);
 
 		void setMotor(Motor * motor) {
 			motor = motor;

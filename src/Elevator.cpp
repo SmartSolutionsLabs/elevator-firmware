@@ -40,17 +40,8 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	this->modulesPointer[3] = new Sensor("SensorFloor3");
 	this->modulesPointer[3]->connect(&pin);
 
-	this->modulesPointer[4] = new Button("Button1");
+	this->modulesPointer[4] = new Joypad("jpd");
 	this->modulesPointer[4]->start();
-	this->getButton(0)->setPIN(17);
-
-	this->modulesPointer[5] = new Button("Button2");
-	this->modulesPointer[5]->start();
-	this->getButton(1)->setPIN(5);
-
-	 this->modulesPointer[6] = new Button("Button3");
-	this->modulesPointer[6]->start();
-	this->getButton(2)->setPIN(18);
 
 	this->modulesPointer[7] = new Machinist("machinist");
 
@@ -77,10 +68,6 @@ Sensor* Elevator::getSensor(int index){
 	return static_cast<Sensor*>(this->modulesPointer[index + 1]);
 }
 
-Button* Elevator::getButton(int index){
-	return static_cast<Button*>(this->modulesPointer[index + 4]);
-}
-
 void Elevator::changingFloor(){
 	this->isNotChangingFloor = false;
 }
@@ -88,20 +75,6 @@ void Elevator::changingFloor(){
 void Elevator::goToFloor(unsigned int floor) {
 	static_cast<Machinist*>(this->modulesPointer[7])->setDestinyFloor(floor);
 	static_cast<Machinist*>(this->modulesPointer[7])->work();
-}
-
-void Elevator::checkControl(){
-	if(state == READY){
-		if(this->getButton(0)->getValue()){
-			this->goToFloor(0);
-		}
-		else if(this->getButton(1)->getValue()){
-			this->goToFloor(1);
-		}
-		else if(this->getButton(2)->getValue()){
-			this->goToFloor(2);
-		}
-	}
 }
 
 void Elevator::checkStatus(){

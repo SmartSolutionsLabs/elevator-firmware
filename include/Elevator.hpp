@@ -3,9 +3,9 @@
 
 #include <Application.hpp>
 #include "Sensor.hpp"
-#include "Button.hpp"
 #include "Motor.hpp"
 #include "Machinist.hpp"
+#include "Joypad.hpp"
 
 
 class Elevator : public Application {
@@ -14,7 +14,6 @@ class Elevator : public Application {
 		void initializeModulesPointerArray(unsigned int quantity) override;
 		Motor* getMotor();
 		Sensor* getSensor(int index);
-		Button* getButton(int index);
 
 		unsigned int startFloor = 1;
 		bool isNotChangingFloor = true;

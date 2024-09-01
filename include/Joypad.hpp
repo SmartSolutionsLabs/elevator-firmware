@@ -15,7 +15,7 @@ class Joypad : public Module {
 			unsigned long lastDebounceTime = 0;
 		};
 
-		const unsigned long debounceDelay = 50;  // Tiempo de debounce en milisegundos
+		const unsigned long debounceDelay = 50; // debounce time in milliseconds
 
 		// Buttons for calling the floor where is pressed
 		Button floorButtons[3];

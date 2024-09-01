@@ -42,7 +42,7 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_3]->connect(&pin);
 
 	this->modulesPointer[INDEX_MODULE_JOYPAD] = new Joypad("jpd");
-	this->modulesPointer[INDEX_MODULE_JOYPAD]->start();
+	this->modulesPointer[INDEX_MODULE_JOYPAD]->connect(nullptr);
 
 	this->modulesPointer[INDEX_MODULE_MACHINIST] = new Machinist("machinist");
 
@@ -62,6 +62,9 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_1]->start();
 	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_2]->start();
 	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_3]->start();
+
+	// starting buttons reading
+	this->modulesPointer[INDEX_MODULE_JOYPAD]->start();
 }
 
 Motor* Elevator::getMotor(){

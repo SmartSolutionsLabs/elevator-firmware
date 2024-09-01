@@ -64,13 +64,21 @@ void Machinist::work() {
 
 	Serial.printf("Will move from %d to %d", currentFloor, (this->destinyFloor + 1));
 
+	// Turn off because we arrived
+	if(currentFloor == this->destinyFloor) {
+		// I hope everything is right
+		this->motor->off();
+
+		return;
+	}
+
 	if(currentFloor < this->destinyFloor) {
 		this->motor->up();
+		return;
 	}
+
 	if(currentFloor > this->destinyFloor) {
 		this->motor->down();
-	}
-	if(currentFloor == this->destinyFloor) {
-		this->motor->off();
+		return;
 	}
 }

@@ -7,9 +7,11 @@
 
 class Sensor : public Module {
 	private:
-		bool value = 0;
-		bool lastValue = 0;
-		bool currentValue = 0;
+		bool buttonState = 0;
+		bool lastButtonState = 0;
+		bool reading;
+		unsigned long lastDebounceTime = 0;
+		const unsigned long debounceDelay = 50; // debounce time in milliseconds
 		uint8_t pin;
 		unsigned int floorIndex;
 
@@ -23,10 +25,8 @@ class Sensor : public Module {
 		void run(void* data) override;
 
 		bool getValue() const {
-			return value;
+			return buttonState;
 		}
-
-		void setValue(bool value);
 
 		void setFloor(unsigned int floor) {
 			floorIndex = floor;

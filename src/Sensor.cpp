@@ -12,28 +12,23 @@ void Sensor::run(void* data) {
 	this->iterationDelay = 10 / portTICK_PERIOD_MS;
 
 	while (1) {
-		if(digitalRead(this->pin) == false){ // pushed
-			this->currentValue = false;
-		}
-		else{
-			this->currentValue = true;
-		}
+		this->reading = digitalRead(this->pin); // LOW is pressed
 
-		if(this->lastValue == true && this->currentValue == false){
-			this->value = true;
-			this->lastValue = this->currentValue;
-
-			this->machinist->handleArrivedFloor(this->floorIndex, this->value);
+		if (this->reading != this->lastButtonState) {
+			this->lastDebounceTime = millis();  // Reset debouncer
 		}
-		else if(this->lastValue == false && this-> currentValue == true){
-			this->lastValue = this->currentValue;
-			this->value = false;
+		if ((millis() - this->lastDebounceTime) > this->debounceDelay) {
+			if (this->reading != this->buttonState) {
+				this->buttonState = this->reading;
+				if (this->buttonState == LOW) {  // Button pressed
+					Serial.printf("Floor %d detected\n", this->floorIndex);
+				}
+			}
 		}
+		this->lastButtonState = this->reading;
 
+		// A little delay to avoid many reads
 		vTaskDelay(this->iterationDelay);
 	}
 }
 
-void Sensor::setValue(bool value){
-	this->value = value;
-}

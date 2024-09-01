@@ -1,5 +1,9 @@
 #include "Machinist.hpp"
 
+void IRAM_ATTR interruptCountdownHand(void* arg) {
+	Machinist * machinist = (Machinist *) arg;
+}
+
 Machinist::Machinist(const char * name, int taskCore) : Module(name, taskCore) {
 }
 
@@ -11,6 +15,17 @@ void Machinist::handleArrivedFloor(unsigned int floorIndex, bool value) {
 
 void Machinist::handleDestinyFloor(unsigned int destinyFloor) {
 	this->destinyFloor = destinyFloor;
+
+	if(this->countdownHandTimer == nullptr) {
+		static const esp_timer_create_args_t countdown_timer_args = {
+				.callback = &interruptCountdownHand,
+				.arg = (void *) this,
+				.dispatch_method = ESP_TIMER_TASK,
+				.name = "machinist-countdown"
+		};
+		esp_timer_create(&countdown_timer_args, &this->countdownHandTimer);
+		esp_timer_start_once(this->countdownHandTimer, 5000000); // One shot after 5 seconds
+	}
 }
 
 void Machinist::connect(void * data) {

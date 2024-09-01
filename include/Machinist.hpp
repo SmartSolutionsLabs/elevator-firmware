@@ -21,6 +21,11 @@ class Machinist : public Module {
 		 */
 		void work();
 
+		/**
+		 * It's the countdown hand.
+		 */
+		esp_timer_handle_t countdownHandTimer = nullptr;
+
 	public:
 		Machinist(const char * name, int taskCore = 1);
 

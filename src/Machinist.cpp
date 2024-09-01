@@ -3,7 +3,7 @@
 Machinist::Machinist(const char * name, int taskCore) : Module(name, taskCore) {
 }
 
-void Machinist::adviceFloor(unsigned int floorIndex, bool value) {
+void Machinist::handleArrivedFloor(unsigned int floorIndex, bool value) {
 	this->floorStates[floorIndex - 1] = value;
 
 	this->work();

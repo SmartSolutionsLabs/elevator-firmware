@@ -31,7 +31,7 @@ class Machinist : public Module {
 		/**
 		 * Modify values in floors array.
 		 */
-		void adviceFloor(unsigned int floorIndex, bool value);
+		void handleArrivedFloor(unsigned int floorIndex, bool value);
 
 		void setDestinyFloor(unsigned int destinyFloor) {
 			destinyFloor = destinyFloor;

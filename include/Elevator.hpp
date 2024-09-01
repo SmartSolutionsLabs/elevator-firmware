@@ -28,12 +28,6 @@ class Elevator : public Application {
 
 		void goToFloor(unsigned int floor);
 		void setHome(); // INICIALIZA EL ASCENSOR A UN LUGAR SEGURO
-		enum State{ READY,
-					MOVING,
-					WAITING,
-					ARRIVED,
-					ERROR
-		} state = READY;
 		String getState();
 };
 

@@ -1,6 +1,6 @@
 #include "Machinist.hpp"
 
-Machinist::Machinist(const char * name, int taskCore) : Module(name, taskCore) {
+Machinist::Machinist(const char * name, int taskCore) : Module(name, taskCore), state(READY) {
 	// defining lambda to call the private work
 	this->privateAction = [this]() {
 		this->work();
@@ -55,6 +55,7 @@ void Machinist::work() {
 	else {
 		// Error because I can't decide
 		this->motor->off();
+		this->state = LOST;
 		return;
 	}
 
@@ -64,17 +65,20 @@ void Machinist::work() {
 	if(currentFloor == this->targetFloor) {
 		// I hope everything is right
 		this->motor->off();
+		this->state = ARRIVED;
 
 		return;
 	}
 
 	if(currentFloor < this->targetFloor) {
 		this->motor->up();
+		this->state = GOING_UP;
 		return;
 	}
 
 	if(currentFloor > this->targetFloor) {
 		this->motor->down();
+		this->state = GOING_DOWN;
 		return;
 	}
 }

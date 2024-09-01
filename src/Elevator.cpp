@@ -79,8 +79,3 @@ void Elevator::goToFloor(unsigned int floor) {
 	//isReady -> esta liberado para otra accion;
 	//isMoving -> esta bloqueado porque se traslada de un piso a otro;
 	//isWaiting -> esta esperando despues la llamada; (con timeout)
-
-String Elevator::getState(){
-	String statePrintable[5] ={"READY","MOVING","WAITING","ARRIVED","ERROR"};
-	return statePrintable[state];
-}

@@ -30,11 +30,11 @@ class Motor : public Module {
 
 		void showStatus();
 
-		enum{
+		enum {
 				OFF,
 				UP,
 				DOWN
-		}state = OFF;
+		} state = OFF;
 
 		unsigned int getState();
 };

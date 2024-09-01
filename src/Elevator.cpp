@@ -23,6 +23,7 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	this->modulesPointer = new Module*[quantity];
 
 	this->modulesPointer[INDEX_MODULE_MOTOR] = new Motor("Motor");
+	this->modulesPointer[INDEX_MODULE_MOTOR]->connect(nullptr);
 	this->modulesPointer[INDEX_MODULE_MOTOR]->start();
 
 	// Pin number for sensor

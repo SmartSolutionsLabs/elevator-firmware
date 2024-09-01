@@ -56,6 +56,10 @@ class Machinist : public Module {
 		 */
 		void handleTargetFloor(unsigned int targetFloor);
 
+		Work getState() {
+			return state;
+		}
+
 		void setMotor(Motor * motor) {
 			motor = motor;
 		}

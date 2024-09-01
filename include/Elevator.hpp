@@ -28,7 +28,6 @@ class Elevator : public Application {
 
 		void goToFloor(unsigned int floor);
 		void setHome(); // INICIALIZA EL ASCENSOR A UN LUGAR SEGURO
-		String getState();
 };
 
 #endif

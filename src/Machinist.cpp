@@ -1,9 +1,5 @@
 #include "Machinist.hpp"
 
-void IRAM_ATTR interruptCountdownHand(void* arg) {
-	Machinist * machinist = (Machinist *) arg;
-}
-
 Machinist::Machinist(const char * name, int taskCore) : Module(name, taskCore) {
 	// defining lambda to call the private work
 	this->privateAction = [this]() {

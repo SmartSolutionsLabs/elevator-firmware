@@ -43,6 +43,7 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	this->modulesPointer[INDEX_MODULE_JOYPAD]->connect(nullptr);
 
 	this->modulesPointer[INDEX_MODULE_MACHINIST] = new Machinist("machinist");
+	CAST_MODULE_POINTER(Machinist, INDEX_MODULE_MACHINIST)->setUpperLimit(3);
 
 	// Passing machinist to all sensors
 	CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_1)->setMachinist(CAST_MODULE_POINTER(Machinist, INDEX_MODULE_MACHINIST));

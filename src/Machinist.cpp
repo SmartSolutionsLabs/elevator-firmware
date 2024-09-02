@@ -30,7 +30,7 @@ void Machinist::handleArrivedFloor(unsigned int floorIndex, bool value) {
 }
 
 void Machinist::handleTargetFloor(unsigned int targetFloor) {
-	if (targetFloor == 0 || targetFloor > 3) {
+	if (targetFloor == 0 || targetFloor > this->upperLimit) {
 		Serial.print("target floor out of bound\n");
 		return;
 	}

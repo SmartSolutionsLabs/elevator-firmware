@@ -23,6 +23,8 @@ class Machinist : public Module {
 		 */
 		unsigned int targetFloor;
 
+		unsigned int upperLimit = 1;
+
 		bool floorStates[3];
 
 		Motor * motor;
@@ -67,6 +69,14 @@ class Machinist : public Module {
 
 		void setMotor(Motor * newMotor) {
 			motor = newMotor;
+		}
+
+		void setUpperLimit(unsigned int limit) {
+			upperLimit = limit;
+		}
+
+		unsigned int getUpperLimit() {
+			return upperLimit;
 		}
 };
 

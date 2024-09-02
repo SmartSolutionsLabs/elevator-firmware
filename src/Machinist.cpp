@@ -39,13 +39,13 @@ void Machinist::handleTargetFloor(unsigned int targetFloor) {
 
 	if(this->countdownHandTimer == nullptr) {
 		static const esp_timer_create_args_t countdown_timer_args = {
-				.callback = [](void* arg) {
-					auto* lambda = static_cast<std::function<void()>*>(arg);
-					(*lambda)(); // Execute lambda
-				},
-				.arg = &this->privateAction,
-				.dispatch_method = ESP_TIMER_TASK,
-				.name = "machinist-countdown"
+			.callback = [](void* arg) {
+				auto* lambda = static_cast<std::function<void()>*>(arg);
+				(*lambda)(); // Execute lambda
+			},
+			.arg = &this->privateAction,
+			.dispatch_method = ESP_TIMER_TASK,
+			.name = "machinist-countdown"
 		};
 		esp_timer_create(&countdown_timer_args, &this->countdownHandTimer);
 		esp_timer_start_once(this->countdownHandTimer, 5000000); // One shot after 5 seconds

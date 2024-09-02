@@ -45,6 +45,8 @@ class Machinist : public Module {
 	public:
 		Machinist(const char * name, int taskCore = 1);
 
+		~Machinist();
+
 		void connect(void * data) override;
 
 		void run(void* data) override;

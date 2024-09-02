@@ -13,6 +13,16 @@ Machinist::Machinist(const char * name, int taskCore) : Module(name, taskCore), 
 	};
 }
 
+Machinist::~Machinist() {
+	if (this->countdownHandTimer) {
+		esp_timer_stop(this->countdownHandTimer);
+	}
+
+	if (this->countdownHandTimer) {
+		esp_timer_delete(this->countdownHandTimer);
+	}
+}
+
 void Machinist::handleArrivedFloor(unsigned int floorIndex, bool value) {
 	this->floorStates[floorIndex - 1] = value;
 

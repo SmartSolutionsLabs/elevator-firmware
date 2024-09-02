@@ -61,30 +61,40 @@ void Machinist::run(void* data) {
 	}
 }
 
-void Machinist::work() {
+void Machinist::work(){
+	Serial.println("State : " + String(this->state));
 	Serial.print("I will work...\n");
-	static unsigned int currentFloor;
+
+	if(this->state == HOME){
+		Serial.println("I am making Home");
+		this->state = READY;
+		return;
+	}
 
 	if (this->floorStates[0] == true && this->floorStates[1] == false && this->floorStates[2] == false) {
-		currentFloor = 0;
+		currentFloor = 1;
+		Serial.println("floor set 1");
 	}
 	else if (this->floorStates[1] == true && this->floorStates[0] == false && this->floorStates[2] == false) {
-		currentFloor = 1;
+		currentFloor = 2;
+		Serial.println("floor set 2");
 	}
 	else if (this->floorStates[2] == true && this->floorStates[1] == false && this->floorStates[1] == false){
-		currentFloor = 2;
+		currentFloor = 3;
+		Serial.println("floor set 3");
 	}
 	else {
 		// Error because I can't decide
 		this->motor->off();
+		Serial.println("floor lost");
 		this->state = LOST;
 		return;
 	}
 
-	Serial.printf("Will move from %d to %d", currentFloor, (this->targetFloor + 1));
+	Serial.printf("Will move from %d to %d", (this->currentFloor), (this->targetFloor));
 
 	// Turn off because we arrived
-	if(currentFloor == this->targetFloor) {
+	if(this->currentFloor == this->targetFloor) {
 		// I hope everything is right
 		this->motor->off();
 		this->state = ARRIVED;
@@ -92,15 +102,35 @@ void Machinist::work() {
 		return;
 	}
 
-	if(currentFloor < this->targetFloor) {
+	if(this->currentFloor < this->targetFloor) {
 		this->motor->up();
 		this->state = GOING_UP;
 		return;
 	}
 
-	if(currentFloor > this->targetFloor) {
+	if(this->currentFloor > this->targetFloor) {
 		this->motor->down();
 		this->state = GOING_DOWN;
 		return;
+	}
+}
+
+void Machinist::setFloorStates(bool floor1 , bool floor2, bool floor3){
+	this->floorStates[0] = floor1;
+	this->floorStates[1] = floor2;
+	this->floorStates[2] = floor3;
+	this->state = HOME;
+
+	if (this->floorStates[0] == true && this->floorStates[1] == false && this->floorStates[2] == false) {
+		this->currentFloor = 1;
+		Serial.println("floor set 1");
+	}
+	else if (this->floorStates[1] == true && this->floorStates[0] == false && this->floorStates[2] == false) {
+		this->currentFloor = 2;
+		Serial.println("floor set 2");
+	}
+	else if (this->floorStates[2] == true && this->floorStates[1] == false && this->floorStates[1] == false){
+		this->currentFloor = 3;
+		Serial.println("floor set 3");
 	}
 }

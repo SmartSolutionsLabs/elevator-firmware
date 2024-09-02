@@ -6,6 +6,7 @@
 #include "Motor.hpp"
 
 enum Work {
+	HOME, // initial work
 	READY, // accepting instructions from anyone and executes "inmediately"
 	GOING_DOWN, // ascending
 	GOING_UP, // descending
@@ -21,6 +22,8 @@ class Machinist : public Module {
 		/**
 		 * Where basket must go.
 		 */
+		unsigned int currentFloor;
+
 		unsigned int targetFloor;
 
 		unsigned int upperLimit = 1;
@@ -78,6 +81,8 @@ class Machinist : public Module {
 		unsigned int getUpperLimit() {
 			return upperLimit;
 		}
+
+		void setFloorStates(bool floor1 , bool floor2, bool floor3);
 };
 
 #endif

@@ -17,6 +17,8 @@
 
 #define INDEX_MODULE_MACHINIST (INDEX_MODULE_JOYPAD + 1)
 
+#define CAST_MODULE_POINTER(type, index) (static_cast<type*>(this->modulesPointer[(index)]))
+
 class Elevator : public Application {
 	public:
 		void processMessage(unsigned char * message, size_t length, bool printable);

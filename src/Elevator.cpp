@@ -47,16 +47,16 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	this->modulesPointer[INDEX_MODULE_MACHINIST] = new Machinist("machinist");
 
 	// Passing machinist to all sensors
-	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_1])->setMachinist(static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST]));
-	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_2])->setMachinist(static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST]));
-	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_3])->setMachinist(static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST]));
+	CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_1)->setMachinist(CAST_MODULE_POINTER(Machinist, INDEX_MODULE_MACHINIST));
+	CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_2)->setMachinist(CAST_MODULE_POINTER(Machinist, INDEX_MODULE_MACHINIST));
+	CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_3)->setMachinist(CAST_MODULE_POINTER(Machinist, INDEX_MODULE_MACHINIST));
 
 	// Passing machinist to the joypad
-	static_cast<Joypad*>(this->modulesPointer[INDEX_MODULE_JOYPAD])->setMachinist(static_cast<Machinist*>(this->modulesPointer[INDEX_MODULE_MACHINIST]));
+	CAST_MODULE_POINTER(Joypad, INDEX_MODULE_JOYPAD)->setMachinist(CAST_MODULE_POINTER(Machinist, INDEX_MODULE_MACHINIST));
 
-	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_1])->setFloor(1);
-	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_2])->setFloor(2);
-	static_cast<Sensor*>(this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_3])->setFloor(3);
+	CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_1)->setFloor(1);
+	CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_2)->setFloor(2);
+	CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_3)->setFloor(3);
 
 	// starting sensors reading
 	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_1]->start();

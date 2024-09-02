@@ -27,11 +27,11 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 	// Pin number for sensor
 	uint8_t pin;
 
-	pin = 23;
+	pin = 16;
 	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_1] = new Sensor("SensorFloor1");
 	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_1]->connect(&pin);
 
-	pin = 16;
+	pin = 23;
 	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_2] = new Sensor("SensorFloor2");
 	this->modulesPointer[INDEX_MODULE_SENSOR_FLOOR_2]->connect(&pin);
 
@@ -64,4 +64,16 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 
 	// starting buttons reading
 	this->modulesPointer[INDEX_MODULE_JOYPAD]->start();
+
+	this->setHome();
+}
+
+void Elevator::setHome() {
+	Serial.println("Setting Home");
+	bool initalStates[3] = {0,0,0};
+	initalStates[0] = CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_1)->getValue();
+	initalStates[1] = CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_2)->getValue();
+	initalStates[2] = CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_3)->getValue();
+	CAST_MODULE_POINTER(Machinist, INDEX_MODULE_MACHINIST)->setFloorStates(initalStates[0],initalStates[1],initalStates[2]);
+	CAST_MODULE_POINTER(Machinist, INDEX_MODULE_MACHINIST)->handleTargetFloor(1);
 }

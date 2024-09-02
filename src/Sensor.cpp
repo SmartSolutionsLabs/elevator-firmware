@@ -33,3 +33,7 @@ void Sensor::run(void* data) {
 	}
 }
 
+bool Sensor::getValue(){
+	bool sensorState = !(digitalRead(this->pin));
+	return sensorState;
+}

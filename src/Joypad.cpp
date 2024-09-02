@@ -30,6 +30,7 @@ void Joypad::run(void* data) {
 				if (this->floorButtons[i].reading != this->floorButtons[i].buttonState) {
 					this->floorButtons[i].buttonState = this->floorButtons[i].reading;
 					if (this->floorButtons[i].buttonState == LOW) {  // Button pressed
+						this->machinist->handleTargetFloor(i + 1);
 						Serial.printf("Btn %d pressed\n", i);
 					}
 				}

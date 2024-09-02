@@ -21,6 +21,7 @@ void Sensor::run(void* data) {
 			if (this->reading != this->buttonState) {
 				this->buttonState = this->reading;
 				if (this->buttonState == LOW) {  // Button pressed
+					this->machinist->handleArrivedFloor(this->floorIndex, this->buttonState);
 					Serial.printf("Floor %d detected\n", this->floorIndex);
 				}
 			}

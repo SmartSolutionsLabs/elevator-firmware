@@ -19,10 +19,10 @@ void Machinist::handleTargetFloor(unsigned int targetFloor) {
 	if(this->countdownHandTimer == nullptr) {
 		static const esp_timer_create_args_t countdown_timer_args = {
 				.callback = [](void* arg) {
-					auto* lambda = static_cast<decltype(privateAction)*>(arg);
+					auto* lambda = static_cast<std::function<void()>*>(arg);
 					(*lambda)(); // Execute lambda
 				},
-				.arg = this,
+				.arg = &this->privateAction,
 				.dispatch_method = ESP_TIMER_TASK,
 				.name = "machinist-countdown"
 		};
@@ -41,6 +41,7 @@ void Machinist::run(void* data) {
 }
 
 void Machinist::work() {
+	Serial.print("I will work...\n");
 	static unsigned int currentFloor;
 
 	if (this->floorStates[0] == true && this->floorStates[1] == false && this->floorStates[2] == false) {

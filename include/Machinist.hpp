@@ -37,6 +37,9 @@ class Machinist : public Module {
 		 */
 		esp_timer_handle_t countdownHandTimer = nullptr;
 
+		/**
+		 * Capsule to execute work.
+		 */
 		std::function<void()> privateAction;
 
 	public:

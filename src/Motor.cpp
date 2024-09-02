@@ -19,16 +19,16 @@ void Motor::run(void* data) {
 }
 
 void Motor::off() {
-	digitalWrite(12, HIGH);
+	digitalWrite(13, HIGH);
 	digitalWrite(14, HIGH);
 }
 
 void Motor::up() {
-	digitalWrite(12, LOW);
+	digitalWrite(13, LOW);
 	digitalWrite(14, LOW);
 }
 
 void Motor::down() {
-	digitalWrite(12, LOW);
+	digitalWrite(13, LOW);
 	digitalWrite(14, HIGH);
 }

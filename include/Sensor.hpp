@@ -35,6 +35,8 @@ class Sensor : public Module {
 		void setMachinist(Machinist * newMachinist) {
 			machinist = newMachinist;
 		}
+
+		bool getValue();
 };
 
 #endif

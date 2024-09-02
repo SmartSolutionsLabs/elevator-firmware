@@ -3,9 +3,7 @@
 void Elevator::processMessage(unsigned char * message, size_t length, bool printable) {
 	unsigned int floor = (unsigned int) message[0] - '0';
 	Serial.println(floor);
-	if (floor > 0 && floor < 4) {
-		CAST_MODULE_POINTER(Machinist, INDEX_MODULE_MACHINIST)->handleTargetFloor(floor);
-	}
+	CAST_MODULE_POINTER(Machinist, INDEX_MODULE_MACHINIST)->handleTargetFloor(floor);
 
 	delete[] message;
 }

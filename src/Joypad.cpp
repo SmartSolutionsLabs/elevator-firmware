@@ -17,15 +17,15 @@ void Joypad::connect(void * data) {
 void Joypad::run(void* data) {
 	// floor buttons quantity
 	unsigned int i = (sizeof(this->floorButtons) / sizeof(*this->floorButtons));
-
 	while (1) {
 		// Verify floor button state
 		while (i > 0) {
 			--i;
-			this->floorButtons[i].reading = digitalRead(this->floorButtons[i].pin);
+			this->floorButtons[i].reading = digitalRead(this->floorButtons[i].pin);  //handle true
 			if (this->floorButtons[i].reading != this->floorButtons[i].lastButtonState) {
 				this->floorButtons[i].lastDebounceTime = millis();  // Reset debouncer
 			}
+
 			if ((millis() - this->floorButtons[i].lastDebounceTime) > this->debounceDelay) {
 				if (this->floorButtons[i].reading != this->floorButtons[i].buttonState) {
 					this->floorButtons[i].buttonState = this->floorButtons[i].reading;

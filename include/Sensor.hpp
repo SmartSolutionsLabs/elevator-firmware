@@ -10,11 +10,12 @@ class Sensor : public Module {
 		bool buttonState = 0;
 		bool lastButtonState = 0;
 		bool reading;
+		bool lastReading;
 		unsigned long lastDebounceTime = 0;
-		const unsigned long debounceDelay = 50; // debounce time in milliseconds
+		const unsigned long debounceDelay = 20; // debounce time in milliseconds
 		uint8_t pin;
 		unsigned int floorIndex;
-
+		unsigned int debugTimer;
 		Machinist * machinist;
 
 	public:
@@ -37,6 +38,8 @@ class Sensor : public Module {
 		}
 
 		bool getValue();
+
+		bool getStartValue();
 };
 
 #endif

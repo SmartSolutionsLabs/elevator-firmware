@@ -25,7 +25,6 @@ Machinist::~Machinist() {
 
 void Machinist::handleArrivedFloor(unsigned int floorIndex, bool value) {
 	this->floorStates[floorIndex - 1] = value;
-
 	this->work();
 }
 
@@ -62,75 +61,95 @@ void Machinist::run(void* data) {
 }
 
 void Machinist::work(){
-	Serial.println("State : " + String(this->state));
-	Serial.print("I will work...\n");
-
-	if(this->state == HOME){
-		Serial.println("I am making Home");
-		this->state = READY;
-		return;
+	Serial.println("I will work...\n");
+	if(this->state == READY || this->state == GOING_DOWN || this->state == GOING_UP ){
+		if(!this->calculateFloor()){
+			Serial.println("error in floors");
+			this->motor->off();
+			this->setState(LOST);
+			return;
+		}
+		else {
+			// Error because I can't decide
+			Serial.println("Just Passing Floor");
+		}
 	}
-
-	if (this->floorStates[0] == true && this->floorStates[1] == false && this->floorStates[2] == false) {
-		currentFloor = 1;
-		Serial.println("floor set 1");
-	}
-	else if (this->floorStates[1] == true && this->floorStates[0] == false && this->floorStates[2] == false) {
-		currentFloor = 2;
-		Serial.println("floor set 2");
-	}
-	else if (this->floorStates[2] == true && this->floorStates[1] == false && this->floorStates[1] == false){
-		currentFloor = 3;
-		Serial.println("floor set 3");
-	}
-	else {
-		// Error because I can't decide
-		this->motor->off();
-		Serial.println("floor lost");
-		this->state = LOST;
-		return;
-	}
-
-	Serial.printf("Will move from %d to %d", (this->currentFloor), (this->targetFloor));
 
 	// Turn off because we arrived
 	if(this->currentFloor == this->targetFloor) {
-		// I hope everything is right
 		this->motor->off();
-		this->state = ARRIVED;
-
+		if(this->state == HOME){
+			this->setState(READY);
+		}
+		// I hope everything is right
+		else if(this->state == GOING_DOWN || this->state == GOING_UP){
+			this->setState(ARRIVED);
+		}
+		else if(this->state == ARRIVED){
+			this->setState(WAITING);
+		}
+		Serial.printf("Will not move from %d \n", (this->currentFloor));
 		return;
 	}
 
 	if(this->currentFloor < this->targetFloor) {
 		this->motor->up();
-		this->state = GOING_UP;
+		this->setState(GOING_UP);
+		Serial.printf("Will move from %d to %d \n", (this->currentFloor), (this->targetFloor));
 		return;
 	}
 
 	if(this->currentFloor > this->targetFloor) {
 		this->motor->down();
-		this->state = GOING_DOWN;
+		this->setState(GOING_DOWN);
+		Serial.printf("Will move from %d to %d \n", (this->currentFloor), (this->targetFloor));
 		return;
 	}
+
 }
 
 void Machinist::setFloorStates(bool floor1 , bool floor2, bool floor3){
 	this->floorStates[0] = floor1;
 	this->floorStates[1] = floor2;
 	this->floorStates[2] = floor3;
-	this->state = HOME;
+
+	if(!this->calculateFloor()){
+		Serial.println("error calculating floor Setting 3 .....");
+		this->currentFloor = 3;
+	}
+	this->handleTargetFloor(1);
+	work();
+}
+
+void Machinist::setState(Work newState){
+	this->state = newState;
+	Serial.println("\t ---- State of Machinist :  " + this->dictionary[this->state] + " ---");
+}
+
+bool Machinist::calculateFloor(){
+	for(int i=0 ; i<3 ;i++){
+		Serial.print("\t|\t");
+		Serial.print(this->floorStates[0]);
+	}
+	Serial.println("\t|\t");
 
 	if (this->floorStates[0] == true && this->floorStates[1] == false && this->floorStates[2] == false) {
 		this->currentFloor = 1;
-		Serial.println("floor set 1");
+		Serial.println("\t ==== floor set 1 ====");
+		return true;
+
 	}
 	else if (this->floorStates[1] == true && this->floorStates[0] == false && this->floorStates[2] == false) {
 		this->currentFloor = 2;
-		Serial.println("floor set 2");
+		Serial.println("\t ==== floor set 2 ====");
+		return true;
 	}
 	else if (this->floorStates[2] == true && this->floorStates[1] == false && this->floorStates[1] == false){
 		this->currentFloor = 3;
-		Serial.println("floor set 3");
+		Serial.println("\t ==== floor set 3 ====");
+		return true;
+	}
+	else{
+		return false;
 	}
 }

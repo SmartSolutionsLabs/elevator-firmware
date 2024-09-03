@@ -21,14 +21,17 @@ void Motor::run(void* data) {
 void Motor::off() {
 	digitalWrite(13, HIGH);
 	digitalWrite(14, HIGH);
+	Serial.println("Motor::off");
 }
 
 void Motor::up() {
 	digitalWrite(13, LOW);
-	digitalWrite(14, LOW);
+	digitalWrite(14, HIGH);
+	Serial.println("Motor::up");
 }
 
 void Motor::down() {
 	digitalWrite(13, LOW);
-	digitalWrite(14, HIGH);
+	digitalWrite(14, LOW);
+	Serial.println("Motor::down");
 }

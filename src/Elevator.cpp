@@ -71,9 +71,10 @@ void Elevator::initializeModulesPointerArray(unsigned int quantity) {
 void Elevator::setHome() {
 	Serial.println("Setting Home");
 	bool initalStates[3] = {0,0,0};
-	initalStates[0] = CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_1)->getValue();
-	initalStates[1] = CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_2)->getValue();
-	initalStates[2] = CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_3)->getValue();
+	initalStates[0] = CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_1)->getStartValue();
+	initalStates[1] = CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_2)->getStartValue();
+	initalStates[2] = CAST_MODULE_POINTER(Sensor, INDEX_MODULE_SENSOR_FLOOR_3)->getStartValue();
 	CAST_MODULE_POINTER(Machinist, INDEX_MODULE_MACHINIST)->setFloorStates(initalStates[0],initalStates[1],initalStates[2]);
-	CAST_MODULE_POINTER(Machinist, INDEX_MODULE_MACHINIST)->handleTargetFloor(1);
+	CAST_MODULE_POINTER(Machinist, INDEX_MODULE_MACHINIST)->setState(Work::HOME);
+
 }

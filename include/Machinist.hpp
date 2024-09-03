@@ -22,9 +22,12 @@ class Machinist : public Module {
 		/**
 		 * Where basket must go.
 		 */
-		unsigned int currentFloor;
 
-		unsigned int targetFloor;
+		String dictionary[7] = {"HOME","READY","GOING_DOWN","GOING_UP","WAITING","ARRIVED","LOST"};
+
+		unsigned int currentFloor = 3;
+
+		unsigned int targetFloor = 1;
 
 		unsigned int upperLimit = 1;
 
@@ -59,6 +62,8 @@ class Machinist : public Module {
 		/**
 		 * Modify values in floors array.
 		 */
+		void handleLeavedFloor(unsigned int floorIndex, bool value);
+
 		void handleArrivedFloor(unsigned int floorIndex, bool value);
 
 		/**
@@ -83,6 +88,10 @@ class Machinist : public Module {
 		}
 
 		void setFloorStates(bool floor1 , bool floor2, bool floor3);
+
+		void setState(Work newState);
+
+		bool calculateFloor();
 };
 
 #endif

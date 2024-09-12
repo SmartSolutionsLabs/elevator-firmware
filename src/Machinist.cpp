@@ -25,6 +25,7 @@ Machinist::~Machinist() {
 
 void Machinist::handleArrivedFloor(unsigned int floorIndex, bool value) {
 	this->floorStates[floorIndex - 1] = value;
+	this->calculateFloor();
 	this->work();
 }
 
@@ -35,7 +36,7 @@ void Machinist::handleTargetFloor(unsigned int targetFloor) {
 	}
 
 	this->targetFloor = targetFloor;
-
+	Serial.printf("target floor %d \n", targetFloor);
 	if(this->countdownHandTimer == nullptr) {
 		static const esp_timer_create_args_t countdown_timer_args = {
 			.callback = [](void* arg) {
@@ -62,11 +63,10 @@ void Machinist::run(void* data) {
 
 void Machinist::work(){
 	Serial.println("I will work...\n");
-	if(this->state == READY || this->state == GOING_DOWN || this->state == GOING_UP ){
+	if(this->state == GOING_DOWN || this->state == GOING_UP ){
 		if(!this->calculateFloor()){
-			Serial.println("error in floors");
-			this->motor->off();
-			this->setState(LOST);
+			Serial.println("between floors");
+			Serial.printf("this->currentFloor = %d \n",this->currentFloor);
 			return;
 		}
 		else {

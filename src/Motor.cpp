@@ -31,7 +31,7 @@ void Motor::up() {
 }
 
 void Motor::down() {
-	digitalWrite(13, LOW);
+	digitalWrite(13, HIGH);
 	digitalWrite(14, LOW);
 	Serial.println("Motor::down");
 }

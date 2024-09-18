@@ -19,6 +19,7 @@ void Motor::run(void* data) {
 }
 
 void Motor::off() {
+	delay(150);
 	digitalWrite(13, HIGH);
 	digitalWrite(14, HIGH);
 	Serial.println("Motor::off");
